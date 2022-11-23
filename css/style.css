@@ -1,0 +1,176 @@
+
+.bordered {
+    box-shadow: 1px 1px 6px 0px  black;
+
+}
+
+.email {
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 80%;
+    height: 40px;
+}
+
+.email::after {
+    content: "";
+    position: absolute;
+    width: 92%;
+    height: 5%;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s;
+}
+
+.email:hover::after {
+    transform-origin: right;
+    transition: transform 1s;
+    transform: scaleX(1);
+}
+
+.email input{
+    all: unset;
+    width: 100%;
+    padding-left: 12px;
+    cursor: text;
+}
+
+.email::before {
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    background: #CDFCF6;
+    overflow: hidden;
+    content: "@galgotiasuniversity.edu.in";
+    position: absolute;
+    width: 37%;
+    height: 90%;
+    top: 0;
+    right: 30px;
+    transition: transform .2s;
+    transform: scale(0);
+}
+
+.email:hover::before {
+    transition: transform .2s;
+    transform: scale(1);
+}
+
+.active {
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 80%;
+    height: 40px;
+    font-size: 17px;
+}
+
+.active::after {
+    content: "";
+    position: absolute;
+    width: 92%;
+    height: 5%;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s;
+}
+
+.active:hover::after {
+    transform-origin: right;
+    transition: transform 1s;
+    transform: scaleX(1);
+}
+
+.active input{
+    all: unset;
+    background: #FFF;
+    width: 100%;
+    padding-left: 12px;
+    cursor: text;
+}
+
+.active::before {
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    background: #CDFCF6;
+    overflow: hidden;
+    content: "@galgotiasuniversity.edu.in";
+    position: absolute;
+    width: 37%;
+    height: 90%;
+    top: 0;
+    right: 30px;
+}
+
+.rot_box1 {
+    animation: animate4 3s linear infinite;
+}
+.rot_box2 {
+    animation: animate5 3s linear infinite;
+}
+@keyframes animate4 {
+    0% {
+        bottom: 44vh;
+        left: -10vw;
+    }
+    100% {
+        bottom: -20vh;
+        left: 46vw;
+        rotate: 720deg;
+    }
+}
+@keyframes animate5 {
+    0% {
+        top: 44vh;
+        right: -10vw;
+    }
+    100% {
+        top: -20vh;
+        right: 46vw;
+        rotate: 720deg;
+    }
+}
+
+@media screen and (max-width: 480px)  {
+    .email {
+        width: 90%;
+    }
+    .active {
+        width: 90%;
+    }
+    .email::before{
+        width: 54%;
+        right: 0;
+        overflow-x: scroll;
+    }
+    .email::after {
+        width: 89%;
+    }
+    .email input {
+        font-size: 13px;
+    }
+    .active::before{
+        width: 54%;
+        right: 0;
+        overflow-x: scroll;
+    }
+    .active::after {
+        width: 89%;
+    }
+    .active input {
+        font-size: 13px;
+    }
+}

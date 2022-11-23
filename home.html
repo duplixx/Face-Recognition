@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="disableBack.js"></script>
+  <title>Document</title>
+</head>
+<style>
+  .notify{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 17px;
+    width: 300px;
+    height: 80px;
+    color: #fff;
+    transition: transform 1s;
+    transform-origin: right;
+    animation: animate 1s;
+    border-radius: 12px 0 0 12px;
+  }
+  .notify::before {
+    content: "";
+    position: absolute;
+    width: 270px;
+    height: 2px;
+    top: 51px;
+    transition: transform 1s;
+    transform-origin: right;
+    animation: animate2 1s;
+    border-bottom: solid white 3px;
+  }
+  .notify:hover::before {
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  @keyframes animate {
+    from {
+      transform: translateX(300px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  @keyframes animate2 {
+    from{
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @media screen and (max-width:480px) {
+    .logout {
+      transition: transform 1s;
+      animation: animate3 1s;
+    }
+    @keyframes animate3 {
+      from {
+        transform: translateX(-120px);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+  }
+  </style>
+<body class="flex flex-col bg-[#f2f3fa] justify-between items-center h-[100vh] overflow-hidden" style="font-family: 'Ubuntu', sans-serif;" >
+  <img src="https://www.galgotiasuniversity.edu.in/images/galgotais-logo.png" alt="" class="w-[50%] mb-8 md:m-0 md:w-[20%] absolute top-4">
+  <nav class="flex justify-between absolute top-24 md:top-4 left-0 w-[100%]">
+    <!-- <a href="login.html" class="hover:bg-cyan-400 h-[min-content] p-2 rounded-lg" style="transition: background 1s;"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg></a> -->
+    <a href="signout.html" class="logout flex flex-col items-center justify-center w-[100px] md:w-[auto] md:h-[85%] bg-red-600 md:bg-transparent md:hover:bg-red-600 p-2 md:ml-4 rounded-r-lg md:rounded-lg transition-[background] duration-[1s]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" /></svg>Log Out</a>
+    <p class="notify bg-cyan-400" id="notify"></p>
+  </nav>
+  <section class="flex flex-col justify-center items-center mt-8 md:m-0 w-[100%] h-[100%] ">
+    <div class="flex flex-col items-center justify-around bg-white w-[90%] md:w-[40%] h-[60%] rounded-xl shadow-lg">
+      <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_yAh844.json" background="transparent" speed="1" style="width: 300px; height: 300px;" autoplay></lottie-player>
+      <h1 class="md:text-xl text-center p-4 md:p-0">Your Attendance is submitted succesfully
+      </h1>
+    </div>
+  </section>
+  <footer class="bg-teal-100 py-2 w-[100%]">
+    <p class="pl-2 text-sm text-center md:text-start" style="font-family: 'Poppins', sans-serif;">&#169Copyright 2022</p>
+  </footer>
+</body>
+<script>
+  var email = localStorage.getItem("email");
+  document.getElementById("notify").innerHTML = "Welcome, "+email+"!"
+  // window.onbeforeunload = function () {
+  //   return "";
+  // }
+</script>
+<script type="text/javascript">
+  function preventBack() {
+    window.history.forward();
+  }
+  
+  setTimeout("preventBack()", 0);
+</script>
+</html>

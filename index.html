@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+   <!-- <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" /> -->
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="css/style.css">
+   <title>Login</title>
+   <script src="disableBack.js"></script>
+</head>
+
+<body onload="init()" class="flex flex-col items-center h-[100vh] overflow-hidden bg-[#f2f3fa]">
+   <img src="https://www.galgotiasuniversity.edu.in/images/galgotais-logo.png" alt="" class="w-[50%] md:w-[20%] absolute top-4 md:left-4">
+   <h1 class="text-xl md:text-3xl my-24 md:my-16">Attendance Login Portal</h1>
+   <div class="w-[90%] h-[55vh] md:h-[65vh] md:w-[40vw] md:h-[65vh] rounded-md md:pt-2 justify-self-end bg-white shadow-lg">
+      <form action="login.py" method="post" enctype="multipart/form-data" class="flex flex-col justify-around md:justify-center items-center h-[100%] md:h-[65vh] w-[100%] py-8 md:p-0">
+         <video class="md:h-[50vh] md:mb-4" onclick="snapshot(this);" id="video" autoplay></video>
+         <label for="email" class="email" id="mail_1">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+            <input type="mail" placeholder="Enter Your email" name="email" id="email"/>
+            <button onclick="login()" value="login" class="hidden md:block"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg></button>
+         </label>
+         <button onclick="login()" value="login" class="block md:hidden bg-cyan-400 py-2 rounded-md mt-4 w-[80%] shadow-lg">Log In</button>
+         <input type="text" accept="image/png" hidden name="current_image" id="current_image">
+      </form>
+   </div>
+   <canvas id="myCanvas" width="400" height="350" class="hidden"></canvas>
+   <!-- <div class="rot_box1 rotate-[360deg] absolute w-16 h-16 bg-cyan-400 bottom-[2vh] left-[26vw] rotate-[30deg] shadow-lg rounded-md z-[99]"></div>
+   <div class="rot_box2 absolute w-16 h-16 bg-cyan-400 top-[2vh] right-[26vw] rotate-[30deg] shadow-lg rounded-md z-[99]"></div> -->
+   <div class="hidden md:block absolute w-[60%] h-[40%] bg-cyan-200 top-[-146px] right-[-350px] rotate-[30deg]"></div>
+   <div class="hidden md:block absolute w-[60%] h-[40%] bg-cyan-200 bottom-[-146px] left-[-350px] rotate-[30deg]"></div>
+   <!-- <div class="absolute w-[17%] h-[30%] top-0 left-0 border-l-[25px] border-t-[25px] border-blue-200"></div>
+   <div class="absolute w-[17%] h-[30%] bottom-0 right-0 border-r-[25px] border-b-[25px] border-blue-200"></div> -->
+</body>
+<script>
+   //--------------------
+   // GET USER MEDIA CODE
+   //--------------------
+   navigator.getUserMedia = (navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia ||
+      navigator.msGetUserMedia);
+
+   var video;
+   var webcamStream;
+   if (navigator.getUserMedia) {
+      navigator.getUserMedia(
+
+         // constraints
+         {
+            video: true,
+            audio: false
+         },
+
+         // successCallback
+         function (localMediaStream) {
+            video = document.querySelector('video');
+            video.srcObject = localMediaStream;
+            webcamStream = localMediaStream;
+         },
+
+         // errorCallback
+         function (err) {
+            console.log("The following error occured: " + err);
+         }
+      );
+   } else {
+      console.log("getUserMedia not supported");
+   }
+
+
+
+   var canvas, ctx;
+
+   function init() {
+      // Get the canvas and obtain a context for
+      // drawing in it
+      mcanvas = document.getElementById("myCanvas");
+      ctx = mcanvas.getContext('2d');
+   }
+
+   function login() {
+      // Draws current image from the video element into the canvas
+      ctx.drawImage(video, 0, 0, mcanvas.width, mcanvas.height);
+      var dataURL = mcanvas.toDataURL('image/png');
+      document.getElementById("current_image").value = dataURL;
+      var x = document.getElementById("email").value;
+      localStorage.setItem("email", x);
+   }
+
+</script>
+<script>
+   window.addEventListener('click', function (e) {
+      if (document.getElementById('mail_1').contains(e.target)) {
+         // Clicked in box
+         document.getElementById("mail_1").classList.add("active");
+         document.getElementById("mail_1").classList.remove("email");
+      } else {
+         // Clicked outside the box
+         document.getElementById("mail_1").classList.add("email");
+         document.getElementById("mail_1").classList.remove("active");
+      }
+   });
+</script>
+</html>
